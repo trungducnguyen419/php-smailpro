@@ -11,8 +11,8 @@ if ($type === 'list-domain-other') {
 	if ($mail_type === 'other') {
 		if (strlen($username) > 0 && strlen($username) < 6) printJson(array('statusCode' => 400, 'message' => 'The username must be at least 6 characters.'), 400);
 		if (strlen($username) < 1) $username = 'random';
-		if (strlen($domain) > 0 && !in_array($domain, $array_domain_other)) printJson(array('statusCode' => 400, 'message' => 'Wrong domain.'), 400);
-		if (strlen($domain) < 1) $domain = $array_domain_other[array_rand($array_domain_other)];
+		if (strlen($domain) > 0 && (!in_array($domain, $array_domain_other) || $domain !== 'random')) printJson(array('statusCode' => 400, 'message' => 'Wrong domain.'), 400);
+		if (strlen($domain) < 1 || $domain === 'random') $domain = $array_domain_other[array_rand($array_domain_other)];
 		$result = requestPost('https://smailpro.com/app/key', '{"domain":"'.$domain.'","username":"'.$username.'"}');
 		$json = json_decode($result, true);
 		if ($json['code'] !== 200) printJson(array('statusCode' => 400, 'message' => $json['msg']), 400);
