@@ -39,8 +39,14 @@ domain: random hoặc có thể tùy chỉnh (chỉ áp dụng đối với mail
 ```
 
 Response OK:
-```
-{"statusCode":200,"email":"000000@storegmail.com","type":"other","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImRhdGFcIjp7XCJlbWFpbFwiOlwiMDAwMDAwQHN0b3JlZ21haWwuY29tXCIsXCJ0aW1lc3RhbXBcIjoxNjU5NDI5NjYwfSxcImNyZWF0ZWRfYXRcIjoxNjU5NTE2MDY3fSI.XfpHRBNDSs5zn1HXrx_ZkVey6TVB6WVmIfbe8-CEOR8","message":"OK"}
+```JSON
+{
+  "statusCode": 200,
+  "email": "000000@storegmail.com",
+  "type": "other",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImRhdGFcIjp7XCJlbWFpbFwiOlwiMDAwMDAwQHN0b3JlZ21haWwuY29tXCIsXCJ0aW1lc3RhbXBcIjoxNjU5NDI5NjYwfSxcImNyZWF0ZWRfYXRcIjoxNjU5NTE2MDY3fSI.XfpHRBNDSs5zn1HXrx_ZkVey6TVB6WVmIfbe8-CEOR8",
+  "message": "OK"
+}
 ```
 
 Response ERROR:
@@ -63,8 +69,12 @@ token: token cũ (*)
 ```
 
 Response OK:
-```
-{"statusCode":200,"new_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImRhdGFcIjp7XCJlbWFpbFwiOlwiMDAwMDAwQHlvdXNtYWlsLmNvbVwiLFwidGltZXN0YW1wXCI6MTY1OTQzMjA2MH0sXCJjcmVhdGVkX2F0XCI6MTY1OTUxODQ3NX0i.Ya4r48h4GvCicxLXoXmkIfzVWESHT7N1G7FCTzsTNhs","message":"OK"}
+```JSON
+{
+  "statusCode": 200,
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImRhdGFcIjp7XCJlbWFpbFwiOlwiMDAwMDAwQHlvdXNtYWlsLmNvbVwiLFwidGltZXN0YW1wXCI6MTY1OTQzMjA2MH0sXCJjcmVhdGVkX2F0XCI6MTY1OTUxODQ3NX0i.Ya4r48h4GvCicxLXoXmkIfzVWESHT7N1G7FCTzsTNhs",
+  "message": "OK"
+}
 ```
 
 Response ERROR:
@@ -77,7 +87,7 @@ Response ERROR:
 
 ### 4. Lấy danh sách list mail inbox (GET/POST)
 ```
-http://localhost/smailpro/?type=get-list-mail&email=000000@yousmail.com&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImRhdGFcIjp7XCJlbWFpbFwiOlwiMDAwMDAwQHlvdXNtYWlsLmNvbVwiLFwidGltZXN0YW1wXCI6MTY1OTQyMzU0MH0sXCJjcmVhdGVkX2F0XCI6MTY1OTUwOTk3MX0i.sjKVt_ck3TH8mUqzzOwqdCUrKyssHaIWmKY8jbjwImQ
+http://localhost/?type=get-list-mail&email=000000@yousmail.com&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImRhdGFcIjp7XCJlbWFpbFwiOlwiMDAwMDAwQHlvdXNtYWlsLmNvbVwiLFwidGltZXN0YW1wXCI6MTY1OTQyMzU0MH0sXCJjcmVhdGVkX2F0XCI6MTY1OTUwOTk3MX0i.sjKVt_ck3TH8mUqzzOwqdCUrKyssHaIWmKY8jbjwImQ
 ```
 Params
 ```
@@ -100,6 +110,35 @@ Response OK:
       "textSnippet": null
     }
   ],
+  "message": "OK"
+}
+```
+
+Response ERROR:
+```JSON
+{
+  "statusCode": 400,
+  "message": "message error"
+}
+```
+
+### 5. Đọc mail từ message id (GET/POST)
+```
+http://localhost/?type=read-mail&email=000000@yousmail.com&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImRhdGFcIjp7XCJlbWFpbFwiOlwiMDAwMDAwQHlvdXNtYWlsLmNvbVwiLFwidGltZXN0YW1wXCI6MTY1OTQyMzU0MH0sXCJjcmVhdGVkX2F0XCI6MTY1OTUwOTk3MX0i.sjKVt_ck3TH8mUqzzOwqdCUrKyssHaIWmKY8jbjwImQ&message_id=1826274e7f5136e0
+```
+Params
+```
+type: read-mail (*)
+email: email của token (*)
+token: token (*)
+message_id: message id (*)
+```
+
+Response OK:
+```JSON
+{
+  "statusCode": 200,
+  "body": "<div dir=\"ltr\">Nội dung</div>\r\n",
   "message": "OK"
 }
 ```
