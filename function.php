@@ -92,9 +92,8 @@ function requestPost($url, $data, $token = '') {
 	curl_close($curl);
 	return $resp;
 }
-function printJson($arr, $code) {
+function printJson($arr) {
 	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
-	http_response_code($code);
 	exit;
 }
 function getDataFromGetPost($name) {
